@@ -2,16 +2,15 @@
   width: 500px;
   margin: auto;
 }
-.empty {
+.cell {
   width: 98px;
   height: 98px;
   display: inline-block;
+}
+.empty {
   border: 1px solid black;
 }
 .bunny {
-  width: 98px;
-  height: 98px;
-  display: inline-block;
   background: pink;
   border: 1px solid black;
 }

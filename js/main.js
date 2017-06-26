@@ -23,7 +23,7 @@ $(document).ready(function() {
       $('.boardgame')
         .append(
           '<div id="' + x + '-' + y +
-          '" class="' + board[x][y].class + '"></div>');
+          '" class="cell ' + board[x][y].class + '"></div>');
     }
   }
 
@@ -37,6 +37,7 @@ $(document).ready(function() {
   function redrawCell(id, currentCell) {
     $(id)
       .attr('class', '')
+      .addClass('cell')
       .addClass(currentCell.class);
   }
 
