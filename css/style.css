@@ -3,14 +3,26 @@
   margin: auto;
 }
 .cell {
-  width: 98px;
-  height: 98px;
+  margin-top: -5px;
+  width: 100px;
+  height: 100px;
   display: inline-block;
 }
-.empty {
-  border: 1px solid black;
+.carrot {
+  background: orange;
+}
+.grass {
+  background: green;
+}
+.water {
+  background: blue;
+}
+.rock {
+  background: grey;
+}
+.log {
+  background: brown;
 }
 .bunny {
   background: pink;
-  border: 1px solid black;
 }
