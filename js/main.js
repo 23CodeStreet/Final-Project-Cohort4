@@ -22,11 +22,11 @@ $(document).ready(function() {
   var arrayX = new Array(5);
   var arrayY = new Array(5);
   var board = [
-    [grassCell, grassCell, carrotCell, grassCell, grassCell],
-    [waterCell, waterCell, waterCell, rockCell, waterCell],
-    [logCell, logCell, waterCell, waterCell, waterCell],
-    [waterCell, rockCell, rockCell, waterCell, waterCell],
-    [grassCell, grassCell, grassCell, grassCell, grassCell],
+    [$.extend({}, grassCell), $.extend({}, grassCell), $.extend({}, carrotCell), $.extend({}, grassCell), $.extend({}, grassCell)],
+    [$.extend({}, waterCell), $.extend({}, waterCell), $.extend({}, waterCell), $.extend({}, rockCell), $.extend({}, waterCell)],
+    [$.extend({}, logCell), $.extend({}, logCell), $.extend({}, waterCell), $.extend({}, waterCell), $.extend({}, waterCell)],
+    [$.extend({}, waterCell), $.extend({}, rockCell), $.extend({}, rockCell), $.extend({}, waterCell), $.extend({}, waterCell)],
+    [$.extend({}, grassCell), $.extend({}, grassCell), $.extend({}, grassCell), $.extend({}, grassCell), $.extend({}, grassCell)],
   ];
 
   var x;
@@ -43,7 +43,6 @@ $(document).ready(function() {
 
   board[4][2].hasBunny = true;
   redrawCell('#4-2', board[4][2]);
-  whereIsBunny();
 
   function redrawCell(id, currentCell) {
     $(id)
@@ -60,10 +59,96 @@ $(document).ready(function() {
     for (x = 0; x < arrayX.length; x++) {
       for (y = 0; y < arrayY.length; y++) {
         if (board[x][y].hasBunny) {
-          console.log('Bunny is on cell ' + x + ' ' + y);
+          return {
+            x: x,
+            y: y,
+          };
         }
       }
     }
   }
+
+  $(document).keydown(function( event ) {
+    event.preventDefault();
+    if ( event.which === 38 ) { // go up
+      // where is the bunny
+      var currentBunny = whereIsBunny();
+
+      if (currentBunny.x !== 0) {
+        // remove bunny from current cell
+        board[currentBunny.x][currentBunny.y].hasBunny = false;
+        redrawCell(
+          '#' + currentBunny.x + '-' + currentBunny.y,
+          board[currentBunny.x][currentBunny.y]
+        );
+
+        // add bunny to next cell
+        board[currentBunny.x - 1][currentBunny.y].hasBunny = true;
+        redrawCell(
+          '#' + (currentBunny.x - 1) + '-' + currentBunny.y,
+          board[currentBunny.x - 1][currentBunny.y]
+        );
+      }
+    } else if (event.which === 40) { // go down
+      // where is the bunny
+      var currentBunny = whereIsBunny();
+
+      if (currentBunny.x !== 4) {
+        // remove bunny from current cell
+        board[currentBunny.x][currentBunny.y].hasBunny = false;
+        redrawCell(
+          '#' + currentBunny.x + '-' + currentBunny.y,
+          board[currentBunny.x][currentBunny.y]
+        );
+
+        // add bunny to next cell
+        board[currentBunny.x + 1][currentBunny.y].hasBunny = true;
+        redrawCell(
+          '#' + (currentBunny.x + 1) + '-' + currentBunny.y,
+          board[currentBunny.x + 1][currentBunny.y]
+        );
+      }
+    } else if (event.which === 39) { // go right
+      // where is the bunny
+      var currentBunny = whereIsBunny();
+
+      if (currentBunny.y !== 4) {
+        // remove bunny from current cell
+        board[currentBunny.x][currentBunny.y].hasBunny = false;
+        redrawCell(
+          '#' + currentBunny.x + '-' + currentBunny.y,
+          board[currentBunny.x][currentBunny.y]
+        );
+
+        // add bunny to next cell
+        board[currentBunny.x][currentBunny.y + 1].hasBunny = true;
+        redrawCell(
+          '#' + currentBunny.x + '-' + (currentBunny.y + 1),
+          board[currentBunny.x][currentBunny.y + 1]
+        );
+      }
+    } else if (event.which === 37) { // go left
+      // where is the bunny
+      var currentBunny = whereIsBunny();
+
+      if (currentBunny.y !== 0) {
+        // remove bunny from current cell
+        board[currentBunny.x][currentBunny.y].hasBunny = false;
+        redrawCell(
+          '#' + currentBunny.x + '-' + currentBunny.y,
+          board[currentBunny.x][currentBunny.y]
+        );
+
+        // add bunny to next cell
+        board[currentBunny.x][currentBunny.y - 1].hasBunny = true;
+        redrawCell(
+          '#' + currentBunny.x + '-' + (currentBunny.y - 1),
+          board[currentBunny.x][currentBunny.y - 1]
+        );
+      }
+    }
+
+  });
+
 
 });
