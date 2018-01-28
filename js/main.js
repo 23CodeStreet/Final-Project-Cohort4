@@ -147,8 +147,59 @@ $(document).ready(function() {
         );
       }
     }
+      
+      // check if win/lose
+      var currentBunny = whereIsBunny();
+      if (board[currentBunny.x][currentBunny.y].class === 'water'){
+          console.log('You loose!');
+      } else if (board[currentBunny.x][currentBunny.y].class === 'carrot'){
+          console.log('You win!');
+      }
 
   });
-
+setInterval(moveLog,1000); //1000 is 1s
+    function moveLog(){
+        if (board[2][0].class === 'log' && board[2][1].class === 'log') {
+            board[2][2] = board[2][1];
+            board[2][1] = board[2][0];
+            board[2][0] = $.extend({}, waterCell);
+            redrawCell('#2-2', board[2][2]);
+            redrawCell('#2-1', board[2][1]);
+            redrawCell('#2-0', board[2][0]);
+        }
+         else if (board[2][1].class === 'log' && board[2][2].class === 'log') {
+            board[2][3] = board[2][2];
+            board[2][2] = board[2][1];
+            board[2][1] = $.extend({}, waterCell); //done
+            redrawCell('#2-3', board[2][3]);
+            redrawCell('#2-2', board[2][2]);
+            redrawCell('#2-1', board[2][1]); //done
+        }
+        else if (board[2][2].class === 'log' && board[2][3].class === 'log') {
+            board[2][4] = board[2][3];
+            board[2][3] = board[2][2];
+            board[2][2] = $.extend({}, waterCell); //done
+            redrawCell('#2-4', board[2][4]);
+            redrawCell('#2-3', board[2][3]);
+            redrawCell('#2-2', board[2][2]); //done
+        }
+        else if (board[2][3].class === 'log' && board[2][4].class === 'log') {
+            board[2][0] = board[2][4];
+            board[2][4] = board[2][3];
+            board[2][3] = $.extend({}, waterCell); //done
+            redrawCell('#2-0', board[2][0]);
+            redrawCell('#2-4', board[2][4]);
+            redrawCell('#2-3', board[2][3]); //done
+        }
+        else if (board[2][4].class === 'log' && board[2][0].class === 'log') {
+            board[2][1] = board[2][0];
+            board[2][0] = board[2][4];
+            board[2][4] = $.extend({}, waterCell); //done
+            redrawCell('#2-1', board[2][1]);
+            redrawCell('#2-0', board[2][0]);
+            redrawCell('#2-4', board[2][4]); //done
+        }
+    } 
 
 });
+

@@ -9,20 +9,28 @@
   display: inline-block;
 }
 .carrot {
-  background: orange;
+  background-image: url("../img/carrot2.jpg");
+  background-size: cover;
 }
 .grass {
-  background: green;
+  background-image: url("../img/grass.jpg");
+  background-size: cover;
 }
 .water {
-  background: blue;
+  background-image: url("../img/water-06.jpg");
+  background-size: cover;
 }
 .rock {
-  background: grey;
+  background-image: url("../img/rock.jpg");
+  background-size: cover;
 }
 .log {
-  background: brown;
+  background-image: url("../img/log.png");
+  background-size: cover;
+  
 }
 .bunny {
-  background: pink;
+  background-image: url("../img/White_Bunny.png");
+  background-size: cover;
+  background-position: 50% 50%;
 }
